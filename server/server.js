@@ -1210,6 +1210,21 @@ app.delete('/api/jobs/:jobNumber', async (req, res) => {
     }
 });
 
+// Add this route to handle root URL requests
+app.get('/', (req, res) => {
+  res.send('StarGate Backend is Running!');
+});
+
+// Your existing test route
+app.get('/test-db', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT NOW() AS current_time');
+    res.json({ success: true, time: result.rows[0].current_time });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // Start server
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
