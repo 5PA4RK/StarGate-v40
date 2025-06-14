@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Bag Generator</title>
+        <!-- Add your favicon here -->
+
+
+
+        <link rel="icon" sizes="300x300" href="IMG/Star Logo2.png" type="image/png">
+
+    <link rel="stylesheet" href="style/AutoDrawBag.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+        .shopping-bag-option {
+            margin-top: 10px;
+            padding: 8px;
+            background: #f0f0f047;
+            border-radius: 4px;
+        }
+        .option-group {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>AutoDraw your Bag</h1>
+    <select id="product-type">
+        <option value="">Select Product Type</option>
+        <option value="Center Seal">Center Seal</option>
+        <option value="2 Side">2 Side</option>
+        <option value="3 Side">3 Side</option>
+        <option value="3 Side K">3 Side K</option>
+        <option value="3 Side Stand Up">3 Side Stand Up</option>
+        <option value="4 Side">4 Side</option>
+        <option value="Normal Bag">Normal Bag</option>
+        <option value="Chicken Bag">Chicken Bag</option>
+        <option value="Flat Bottom">Flat Bottom</option>
+        <option value="Shopping Bag">Shopping Bag</option>
+        <option value="T-Shirt Bag">T-Shirt Bag</option>
+        <option value="Roll">Roll</option>
+    </select>
+    
+    <!-- Main controls container (hidden initially) -->
+    <div id="app-controls">
+        <div class="input-group" id="dimensions">
+            <div>
+                <label for="widthInput">Width</label>
+                <input type="number" id="widthInput" placeholder="cm" min="0" step="0.1" />
+            </div>
+            <div>
+                <label for="heightInput">Height</label>
+                <input type="number" id="heightInput" placeholder="cm" min="0" step="0.1" />
+            </div>
+            <div id="gusset-control">
+                <label for="gussetInput">Gusset</label>
+                <input type="number" id="gussetInput" placeholder="cm" min="0" step="0.1" />
+            </div>
+
+
+            <!-- Shopping Bag specific controls -->
+ <!-- Replace both options divs with this single one -->
+<div id="common-options" class="hidden shopping-bag-option">
+    <div class="option-group">
+        <label>
+            <input type="checkbox" id="twoFacesCheckbox"> Two Faces
+        </label>
+    </div>
+    <!-- Shopping Bag specific options -->
+    <div id="shopping-bag-specific" class="hidden">
+        <div class="option-group">
+            <label>
+                <input type="checkbox" id="sideGussetCheckbox"> Side Gusset
+            </label>
+        </div>
+        <div class="option-group">
+            <label>
+                <input type="checkbox" id="bottomGussetCheckbox"> Bottom Gusset
+            </label>
+        </div>
+        <div class="option-group">
+            <label>
+                <input type="checkbox" id="holeHandle"> Hole Handle
+            </label>
+        </div>
+        <div class="option-group">
+            <label>
+                <input type="checkbox" id="stripHandle"> Strip Handle
+            </label>
+        </div>
+    </div>
+</div>
+            
+            <div id="flap-control">
+                <label for="flapInput">Flap</label>
+                <input type="number" id="flapInput" placeholder="cm" min="0" step="0.1" />
+            </div>
+
+            <div id="t-shirt-bag-options" class="hidden shopping-bag-option">
+                <div class="option-group">
+                    <label>
+                        <input type="checkbox" id="twoFacesTShirtCheckbox"> Two Faces
+                    </label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <!-- Preview container (hidden initially) -->
+    <div id="preview-container">
+        <div id="preview"></div>
+    </div>
+
+    <!-- Download buttons -->
+    <div id="download-buttons" class="download-buttons" style="display: none;">
+        <button id="downloadSvg">Download SVG</button>
+        <button id="downloadPdf">Download PDF</button>
+    </div>
+
+    <!-- 1. Load jsPDF first -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        window.jsPDF = window.jspdf.jsPDF;
+    </script>
+
+<!-- 2. Load ALL bag scripts -->
+<script src="js/infoBar.js"></script>
+<script src="js/Bags/shoppingBag.js"></script> <!-- should be loaded first -->
+<script src="js/Bags/shoppingBagHandle.js"></script>
+<script src="js/Bags/shoppingBagHole.js"></script>
+<script src="js/Bags/centerSealBag.js"></script>
+<script src="js/Bags/twoSide.js"></script>
+<script src="js/Bags/threeSide.js"></script>
+<script src="js/Bags/threeSideK.js"></script>
+<script src="js/Bags/threeSideStandUp.js"></script>
+<script src="js/Bags/fourSide.js"></script>
+<script src="js/Bags/normalBag.js"></script>
+<script src="js/Bags/chickenBag.js"></script>
+<script src="js/Bags/flatBottom.js"></script>
+<script src="js/Bags/tShirtBag.js"></script>
+<script src="js/Bags/Roll.js"></script>
+
+
+<!-- 3. Load main.js LAST -->
+<script src="js/mainBagsApp.js"></script>
+</body>
+</html>
