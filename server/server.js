@@ -14,7 +14,7 @@ const upload = multer({
 });
 
 const app = express();
-const PORT = process.env.PORT || 7004;
+const PORT = process.env.PORT || 10000;
 
 // Middleware
 app.use(cors());
@@ -1224,7 +1224,32 @@ app.get('/test-db', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+// ===== ADD HEALTH CHECK HERE =====
+// Right after your '/' and '/test-db' routes (~line 20 in your original code)
 
+// Your existing root route
+app.get('/', (req, res) => {
+    res.send('StarGate Backend is Running!');
+  });
+  
+  // Your existing test route
+  app.get('/test-db', async (req, res) => {
+    try {
+      const result = await pool.query('SELECT NOW() AS current_time');
+      res.json({ success: true, time: result.rows[0].current_time });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+  
+  // 〰️〰️〰️ ADD THIS NEW ROUTE 〰️〰️〰️
+  app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'ok' });
+  });
+  // 〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️
+  
+  // ===== DON'T TOUCH ANYTHING BELOW THIS =====
+  // Your existing app.listen() and other code continues...
 // Start server
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
